@@ -1,47 +1,52 @@
 # ============================================================================ #
-name: Build
+name: Build and Push Images
 
-# Triggers the workflow on push to the 'main' branch
 on:
   push:
     branches:
     - main
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run
-# in-progress and latest queued. However, do NOT cancel in-progress runs as we
-# want to allow these production deployments to complete.
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-env:
-  JEKYLL_ENV: production
-  LC_ALL: C.UTF-8
+    paths:
+    - 'images/pg-dhcp/**'
+    - 'images/openvpn-client/**'
 
 jobs:
-  # Build job
-  build:
-    # runs-on: self-hosted
-    # Uses a free GitHub runner
+  filter:
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.3
-      # image: ruby:3.0.3-alpine3.15
-      # image: ruby:3.4.4-alpine3.22
+    outputs:
+      changes: ${{ steps.changes.outputs.changes }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-    - name: Build container image
-      run: |
-        true
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          pg-dhcp:
+          - 'images/pg-dhcp/**'
+          openvpn-client:
+          - 'images/openvpn-client/**'
+
+  build:
+    needs: filter
+    if: ${{ needs.filter.outputs.changes != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ${{ fromJson(needs.filter.outputs.changes) }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build and Push with Buildah
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: ghcr.io/paul-grozav/${{ matrix.folder }}
+        tags: latest ${{ github.sha }}
+        context: ./${{ matrix.folder }}/build_context
+        dockerfiles: ./${{ matrix.folder }}/Containerfile
+    - name: Push to Registry
+      uses: redhat-actions/push@v1
+      with:
+        image: ghcr.io/paul-grozav/${{ matrix.folder }}
+        tags: latest ${{ github.sha }}
+        registry: ghcr.io
+        username: ${{ secrets.REGISTRY_USER }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
 # ============================================================================ #
