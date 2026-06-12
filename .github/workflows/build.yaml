@@ -29,6 +29,10 @@ jobs:
     needs: filter
     if: ${{ needs.filter.outputs.changes != '[]' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # This is required to give permission to upload image to GHCR
+      packages: write
     strategy:
       matrix:
         folder: ${{ fromJson(needs.filter.outputs.changes) }}
