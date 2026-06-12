@@ -39,7 +39,9 @@ jobs:
         echo "Current directory: $(pwd)"
         # This will list all files recursively
         ls -R
-
+        ls -la ./images/${{ matrix.folder }}/build_context
+        ls -la ./images/${{ matrix.folder }}/Containerfile
+        cat ./images/${{ matrix.folder }}/Containerfile
     - name: Build image with Buildah
       uses: redhat-actions/buildah-build@v2
       with:
