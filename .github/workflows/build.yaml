@@ -59,6 +59,8 @@ jobs:
         image: ${{ matrix.folder }}
         tags: latest ${{ github.sha }}
         registry: ghcr.io/paul-grozav
-        username: ${{ secrets.REGISTRY_USER }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+#        username: ${{ secrets.REGISTRY_USER }}
+#        password: ${{ secrets.REGISTRY_PASSWORD }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 # ============================================================================ #
