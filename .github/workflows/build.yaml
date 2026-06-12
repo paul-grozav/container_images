@@ -45,8 +45,8 @@ jobs:
       with:
         image: ghcr.io/paul-grozav/${{ matrix.folder }}
         tags: latest ${{ github.sha }}
-        context: ${{ matrix.folder }}/build_context
-        dockerfiles: ${{ matrix.folder }}/Containerfile
+        context: ./images/${{ matrix.folder }}/build_context
+        dockerfiles: ./images/${{ matrix.folder }}/Containerfile
     - name: Push to Registry
       uses: redhat-actions/push-to-registry@v2
       with:
