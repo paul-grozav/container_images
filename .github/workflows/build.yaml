@@ -34,6 +34,12 @@ jobs:
         folder: ${{ fromJson(needs.filter.outputs.changes) }}
     steps:
     - uses: actions/checkout@v4
+    - name: Debug Workspace
+      run: |
+        echo "Current directory: $(pwd)"
+        # This will list all files recursively
+        ls -R
+
     - name: Build image with Buildah
       uses: redhat-actions/buildah-build@v2
       with:
