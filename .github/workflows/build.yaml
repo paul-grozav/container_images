@@ -34,13 +34,13 @@ jobs:
         folder: ${{ fromJson(needs.filter.outputs.changes) }}
     steps:
     - uses: actions/checkout@v4
-    - name: Build and Push with Buildah
+    - name: Build image with Buildah
       uses: redhat-actions/buildah-build@v2
       with:
         image: ghcr.io/paul-grozav/${{ matrix.folder }}
         tags: latest ${{ github.sha }}
-        context: ./${{ matrix.folder }}/build_context
-        dockerfiles: ./${{ matrix.folder }}/Containerfile
+        context: ${{ matrix.folder }}/build_context
+        dockerfiles: ${{ matrix.folder }}/Containerfile
     - name: Push to Registry
       uses: redhat-actions/push-to-registry@v2
       with:
