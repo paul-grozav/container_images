@@ -42,11 +42,11 @@ jobs:
         context: ./${{ matrix.folder }}/build_context
         dockerfiles: ./${{ matrix.folder }}/Containerfile
     - name: Push to Registry
-      uses: redhat-actions/push@v1
+      uses: redhat-actions/push-to-registry@v2
       with:
         image: ghcr.io/paul-grozav/${{ matrix.folder }}
         tags: latest ${{ github.sha }}
-        registry: ghcr.io
+        registry: ghcr.io/paul-grozav
         username: ${{ secrets.REGISTRY_USER }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 # ============================================================================ #
