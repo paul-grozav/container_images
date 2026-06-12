@@ -45,7 +45,7 @@ jobs:
     - name: Build image with Buildah
       uses: redhat-actions/buildah-build@v2
       with:
-        image: ghcr.io/paul-grozav/${{ matrix.folder }}
+        image: ${{ matrix.folder }}
         tags: latest ${{ github.sha }}
         context: ./images/${{ matrix.folder }}/build_context
         dockerfiles: ./images/${{ matrix.folder }}/Containerfile
