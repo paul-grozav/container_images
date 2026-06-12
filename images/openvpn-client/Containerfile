@@ -2,6 +2,10 @@
 # Author: Tancredi-Paul Grozav <paul@grozav.info>
 # ============================================================================ #
 from debian:13
-copy ./my-static-binary /my-static-binary
-cmd ["/my-static-binary"]
+copy ./fs/root/setup.sh /root/setup.sh
+run \
+  /bin/bash /root/setup.sh ; \
+  rm -f /root/setup.sh
+entrypoint ["/bin/bash"]
+cmd ["/root/entrypoint.sh"]
 # ============================================================================ #
