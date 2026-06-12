@@ -2,8 +2,8 @@
 # Author: Tancredi-Paul Grozav <paul@grozav.info>
 # ============================================================================ #
 set -x &&
-echo "Building image ..." &&
 date &&
+echo "Building image ..." &&
 
 apt-get update &&
 apt-get install -y \
@@ -18,9 +18,10 @@ apt-get install -y \
   ` # curl to debug vpn access ` \
   ` # curl ` \
   &&
+apt-get clean &&
+​rm -rf /var/lib/apt/lists/* &&
 
-
-date
+date &&
 echo "Done installing packages" &&
 true
 # ============================================================================ #
