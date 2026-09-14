@@ -5,6 +5,7 @@
 set -x &&
 echo "Building image ..." &&
 export DEBIAN_FRONTEND=noninteractive &&
+apt-get update &&
 apt-get install \
   ` # Connect to remote networks ` \
   openvpn \
