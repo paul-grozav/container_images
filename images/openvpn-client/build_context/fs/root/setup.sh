@@ -6,7 +6,7 @@ set -x &&
 echo "Building image ..." &&
 export DEBIAN_FRONTEND=noninteractive &&
 apt-get update &&
-apt-get install \
+apt-get install -y \
   ` # Connect to remote networks ` \
   openvpn \
   ` # OTP generator for logging in with 2FA ` \
