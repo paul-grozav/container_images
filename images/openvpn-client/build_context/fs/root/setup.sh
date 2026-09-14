@@ -1,3 +1,4 @@
+#!/bin/sh
 # ============================================================================ #
 # Author: Tancredi-Paul Grozav <paul@grozav.info>
 # ============================================================================ #
@@ -12,7 +13,7 @@ apk add \
   ` # Connect to remote networks ` \
   openvpn \
   ` # OTP generator for logging in with 2FA ` \
-  oath-toolkit \
+  oath-toolkit-oathtool \
   ` # Forward tcp ports from local to VPN destination ` \
   socat \
   ` # Interact over std in and out with programs ` \
