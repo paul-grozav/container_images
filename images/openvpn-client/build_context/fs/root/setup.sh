@@ -21,7 +21,7 @@ apt-get install -y \
   curl \
   &&
 apt-get clean &&
-​rm -rf /var/lib/apt/lists/* &&
+rm -rf /var/lib/apt/lists/* &&
 
 echo "Done installing packages" &&
 set +x &&
