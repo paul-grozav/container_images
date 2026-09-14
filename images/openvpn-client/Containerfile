@@ -4,8 +4,8 @@
 from docker.io/alpine:3.24.1
 copy ./fs/root/setup.sh /root/setup.sh
 run \
-  /bin/bash /root/setup.sh ; \
+  /bin/sh -x /root/setup.sh ; \
   rm -f /root/setup.sh
-entrypoint ["/bin/bash"]
+entrypoint ["/bin/sh"]
 cmd ["/root/entrypoint.sh"]
 # ============================================================================ #
