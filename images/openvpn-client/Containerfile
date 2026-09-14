@@ -1,11 +1,11 @@
 # ============================================================================ #
 # Author: Tancredi-Paul Grozav <paul@grozav.info>
 # ============================================================================ #
-from docker.io/alpine:3.24.1
+from docker.io/debian:12.15
 copy ./fs/root/setup.sh /root/setup.sh
 run \
-  /bin/sh -x /root/setup.sh ; \
+  /bin/bash -x /root/setup.sh ; \
   rm -f /root/setup.sh
-entrypoint ["/bin/sh"]
+entrypoint ["/bin/bash"]
 cmd ["/root/entrypoint.sh"]
 # ============================================================================ #
