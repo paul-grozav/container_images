@@ -10,9 +10,9 @@ echo "Building image ..." &&
 # apt-get clean &&
 # rm -rf /var/lib/apt/lists/* &&
 apk add \
-  ` # Downloads the index temporarily to memory and deletes it immediately after
-  ` # installation finishes. This is to reduce the image size ` \
-  --no-cache
+  ` # Downloads the index temporarily to memory and deletes it immediately ` \
+  ` # after installation finishes. This is to reduce the image size ` \
+  --no-cache \
   ` # Connect to remote networks ` \
   openvpn \
   ` # OTP generator for logging in with 2FA ` \
