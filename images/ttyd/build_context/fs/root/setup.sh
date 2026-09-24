@@ -2,6 +2,7 @@
 # ============================================================================ #
 # Author: Tancredi-Paul Grozav <paul@grozav.info>
 # ============================================================================ #
+# Part of the remote package.
 # See also:
 # 1. https://github.com/tsl0922/ttyd
 # 2. https://github.com/jpillora/chisel
