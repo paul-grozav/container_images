@@ -8,6 +8,7 @@ on:
     paths:
     - 'images/pg-dhcp/**'
     - 'images/openvpn-client/**'
+    - 'images/ttyd/**'
 
 jobs:
   filter:
