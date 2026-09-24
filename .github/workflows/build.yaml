@@ -24,6 +24,8 @@ jobs:
           - 'images/pg-dhcp/**'
           openvpn-client:
           - 'images/openvpn-client/**'
+          ttyd:
+          - 'images/ttyd/**'
 
   build:
     needs: filter

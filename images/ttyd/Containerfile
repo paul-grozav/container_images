@@ -1,0 +1,11 @@
+# ============================================================================ #
+# Author: Tancredi-Paul Grozav <paul@grozav.info>
+# ============================================================================ #
+from docker.io/alpine:3.24.2
+copy ./fs/root/setup.sh /root/setup.sh
+run \
+  /bin/sh -x /root/setup.sh ; \
+  rm -f /root/setup.sh
+entrypoint ["/bin/sh"]
+cmd ["/root/entrypoint.sh"]
+# ============================================================================ #
